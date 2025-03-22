@@ -6,6 +6,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.ExceptionHandler.UserNotFoundException;
 import com.app.dto.UserDto;
 import com.app.entity.User;
 import com.app.repository.UserRepository;
@@ -29,6 +30,13 @@ public class UserServiceImpl implements UserService {
 		return "user created successfully";
 		
 		
+	}
+
+	@Override
+	public UserDto logInUser(long id) {
+		User user = userRepo.findById(id).orElseThrow(()-> new UserNotFoundException("User not found"));
+		UserDto userDTO = mapper.map(user, UserDto.class);
+		return userDTO;
 	}
 	
 
