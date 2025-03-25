@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.ExceptionHandler.UserNotFoundException;
-import com.app.dto.UserDto;
+import com.app.dto.RequestUserDto;
+import com.app.dto.ResponseUserDto;
+import com.app.entity.Role;
 import com.app.entity.User;
 import com.app.repository.UserRepository;
 
@@ -24,8 +26,9 @@ public class UserServiceImpl implements UserService {
 	private ModelMapper mapper;
 
 	@Override
-	public String addUser(UserDto user) {
+	public String addUser(RequestUserDto user) {
 		User newUser = mapper.map(user,User.class);
+		newUser.setRole(Role.USERS);
 		User savedUser = Optional.ofNullable(userRepo.save(newUser)).orElseThrow(()-> new RuntimeException("Failed to save user"));
 		return "user created successfully";
 		
@@ -33,9 +36,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto logInUser(long id) {
+	public ResponseUserDto logInUser(long id) {
 		User user = userRepo.findById(id).orElseThrow(()-> new UserNotFoundException("User not found"));
-		UserDto userDTO = mapper.map(user, UserDto.class);
+		ResponseUserDto userDTO = mapper.map(user, ResponseUserDto.class);
 		return userDTO;
 	}
 	

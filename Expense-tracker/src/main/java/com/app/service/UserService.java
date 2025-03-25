@@ -1,12 +1,13 @@
 package com.app.service;
 
-import com.app.dto.UserDto;
+import com.app.dto.RequestUserDto;
+import com.app.dto.ResponseUserDto;
 
 
 public interface UserService {
 		
-	public String addUser(UserDto user);
+	public String addUser(RequestUserDto user);
 	
-	public UserDto logInUser(long id);
+	public ResponseUserDto logInUser(long id);
 
 }

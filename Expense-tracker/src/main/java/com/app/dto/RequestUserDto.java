@@ -1,9 +1,9 @@
 package com.app.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,20 +13,20 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+public class RequestUserDto {
 
 	@NotBlank(message = "The first name cannot be blank.")
 	private String firstName;	
 	
-	@NotBlank(message = "The last name cannot be blank.")
+	@NotBlank(message = "The last name cannot be blank")
 	private String lastName;
 	
 	@NotBlank(message = "The email cannot be blank.")
 	@Email(message = "Please enter a valid e-mail format")
 	private String email;	
 	
-	
-	private long mobileNumber;
+	@Pattern(regexp="(^$|[0-9]{10})", message = "Please enter a valid phone number")
+	private String mobileNumber;
 	
 	@NotBlank(message = "The username cannot be blank.")
 	private String userName;

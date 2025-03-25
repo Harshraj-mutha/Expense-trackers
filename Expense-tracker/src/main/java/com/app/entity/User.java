@@ -2,6 +2,8 @@ package com.app.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
@@ -27,10 +29,14 @@ public class User extends BaseEntity {
 	private String email;
 	
 	@Column(name = "mobile_number", length = 10, nullable = false)
-	private long mobileNumber;
+	private String mobileNumber;
 	
 	@Column(name = "user_name", nullable = false, unique = true)
 	private String userName;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "role", nullable = false)
+	private Role role;
 	
 	@Column(name = "password",nullable = false)
 	private String password;

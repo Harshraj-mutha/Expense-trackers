@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dto.UserDto;
+import com.app.dto.RequestUserDto;
 import com.app.service.UserService;
 
 import jakarta.validation.Valid;
@@ -23,7 +23,7 @@ public class UserController {
 	private UserService userService;
 	
 	@PostMapping("/signup")
-	public ResponseEntity<?> signUpNewUser(@RequestBody @Valid UserDto user){
+	public ResponseEntity<?> signUpNewUser(@RequestBody @Valid RequestUserDto user){
 		return  ResponseEntity.status(HttpStatus.CREATED).body(userService.addUser(user));
 	}
 	
